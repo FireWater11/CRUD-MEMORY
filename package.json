@@ -1,0 +1,24 @@
+{
+  "name": "crud-memory",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FireWater11/CRUD-MEMORY.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FireWater11/CRUD-MEMORY/issues"
+  },
+  "homepage": "https://github.com/FireWater11/CRUD-MEMORY#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

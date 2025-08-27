@@ -11,18 +11,18 @@ app.use(express.json());
 */
 
 let id = 1;
-const admin = {
+const users = [{
     nome: "admin", 
     email: "admin@gmail.com",
     id: id
-}
+}];
 
 app.listen(8080, () => {
     console.log("inicialized api");
 });
 
 app.get('/users', (req, res) => {
-    res.json(users).status(200);
+    res.status(200).json(users);
 });
 
 app.post('/users', (req, res) => {
@@ -31,8 +31,20 @@ app.post('/users', (req, res) => {
     // adc na lista/db
     // atualizar o id (++)
     // retornar pro front o status 201(sucesso)
-    const {nome, email} = req.body
+    const {nome, email} = req.body;
     if ( !nome || !email) {
         return res.status(400).json({mensagem: "error"});
     }
-})
+
+    id++;
+    
+    const newUser = {
+        name: nome,
+        email: email,
+        id: id
+    };
+
+    users.push(newUser);
+
+    res.status(201).json(newUser);
+});

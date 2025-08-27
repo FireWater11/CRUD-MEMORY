@@ -54,16 +54,25 @@ app.delete('/users/:id', (req, res) => {
     const id_num = parseInt(req.params.id);
 
     if (isNaN(id_num)) {
-        return res.status(400).json({error: "ID not a number(NaN)"})
+        return res.status(400).json({error: "ID not a number(NaN)"});
     }
 
     for (let idx = 0; idx < users.length; idx++) {
         if (users[idx].id === id_num) {
             users.splice(idx, 1); // esse 1 remove so UM numero e o splice é para nao criar um novo array, so mudar.
             return res.status(204).send(); // tem q ter o send (sla porque)
-        }
-    }
+        };
+    };
 
-    return res.status(404).json({error: "ID not found in Database."})
+    // let idx = users.findIndex(
+    //     (users) => users.id === id_num
+    // );
+
+    // if (idx === -1) {
+    //     res.status(404).json({error: "ID not found in Database"})
+    // }
+
+
+    return res.status(404).json({error: "ID not found in Database."});
 
 })

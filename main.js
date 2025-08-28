@@ -95,8 +95,23 @@ app.patch('/users/:id', (req, res) => {
     const { nome, email } = req.body;
 
     if (!nome && !email) {
-        return res.status(400).json({error: "send at least one of the information"});
+        return res.status(400).json({error: "send at least one of the information."});
     };
 
+    if(email) {
+        let find_email = users.findIndex((users) => users.email === email);
+
+        if(find_email !== -1) { // -1 significa que ele ACHOU.
+            return res.status(409).json({error: "email already registered."});
+        };
+    };
     
+    user.email = email;
+    
+    if(nome) {
+        user.nome = nome;
+    };
+
+    res.status(200).json(user)
+
 }); 

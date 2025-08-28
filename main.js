@@ -54,7 +54,7 @@ app.delete('/users/:id', (req, res) => {
     const id_num = parseInt(req.params.id);
 
     if (isNaN(id_num)) {
-        return res.status(400).json({error: "ID not a number(NaN)"});
+        return res.status(400).json({error: "ID not a number(NaN)."});
     }
 
     for (let idx = 0; idx < users.length; idx++) {
@@ -75,4 +75,20 @@ app.delete('/users/:id', (req, res) => {
 
     return res.status(404).json({error: "ID not found in Database."});
 
-})
+});
+
+app.patch('/users/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    if(NaN(id)) {
+        return res.status(400).json({error: "ID not a number(NaN)."});
+    }
+
+    const user = users.find(
+        (users_find) => users_find.id ===  id
+    );
+
+    if (!user) { // poderia ser tambem user === undefined(fiz desse jeito).
+        return res.status(404).json({error: "ID not found in Database."});
+    };
+}); 

@@ -80,7 +80,7 @@ app.delete('/users/:id', (req, res) => {
 app.patch('/users/:id', (req, res) => {
     const id = parseInt(req.params.id);
 
-    if(NaN(id)) {
+    if(isNaN(id)) {
         return res.status(400).json({error: "ID not a number(NaN)."});
     }
 
@@ -91,4 +91,12 @@ app.patch('/users/:id', (req, res) => {
     if (!user) { // poderia ser tambem user === undefined(fiz desse jeito).
         return res.status(404).json({error: "ID not found in Database."});
     };
+
+    const { nome, email } = req.body;
+
+    if (!nome && !email) {
+        return res.status(400).json({error: "send at least one of the information"});
+    };
+
+    
 }); 

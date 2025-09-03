@@ -1,6 +1,16 @@
 import express, { json } from "express";
+import { imprimir, adm  } from "./teste_middleware.js";
+
 const app = express();
-app.use(express.json());
+
+
+// Interprete o que vier como um JSON. Isso é um middleware global (aplicado em todas as rotas).
+// executado antes de TODAS as rotas.
+app.use(express.json()); // isso é um middleware . 
+
+
+// app.use(imprimir);
+
 
 /*
     CRUD em memoria
@@ -8,6 +18,17 @@ app.use(express.json());
     criar rota para cadastrar usuario
     criar rota para deletar usuario
     criar rota para atualizar usuario
+*/
+
+/* 
+
+middleware: sao etapas que vc tem que seguir e passar antes de chegar no seu objetivo.
+ex: verificar se esta logado, verificar os dados, etc.
+
+definir por ex, para onde continua (as etapas) e se continua.
+
+LOGS: quem está chamando a API (um registro).
+
 */
 
 let id = 1;
@@ -21,11 +42,13 @@ app.listen(8080, () => {
     console.log("inicialized api");
 });
 
-app.get('/users', (req, res) => {
+
+
+app.get('/users', imprimir,  /* exemploMiddleware, Middleware2 (quantos precisar) */ (req, res) => {
     res.status(200).json(users);
 });
 
-app.post('/users', (req, res) => {
+app.post('/users', imprimir,  (req, res) => {
     // pegar informacoes do body
     // definir id
     // adc na lista/db
@@ -115,3 +138,8 @@ app.patch('/users/:id', (req, res) => {
     res.status(200).json(user)
 
 }); 
+
+
+app.delete("/usuarios/:id", adm , (req, res) => {
+    console.log("kk deletado")
+})

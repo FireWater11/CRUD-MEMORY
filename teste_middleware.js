@@ -1,7 +1,8 @@
+/*
 export function imprimir(req, res, next) {
-    console.log(`passou`);
     next();
 }
+*/
 
 export function adm(req, res, next) {
     const { userType } = req.body;

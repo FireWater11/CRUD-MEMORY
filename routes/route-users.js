@@ -1,7 +1,7 @@
 import express from "express";
 import { imprimir, adm  } from "../teste_middleware.js";
 import Router from "express";
-import { allUsers, createUser, deleteUser, updateUser } from "../controller/users-controller.js";
+import { allUsers, createUser, deleteUser, searchId, updateUser } from "../controller/users-controller.js";
 
 const router = express();
 
@@ -9,6 +9,10 @@ const router = express();
 
 router.get('/', imprimir,  /* exemploMiddleware, Middleware2 (quantos precisar) */ (req, res) => {
     allUsers(req, res);
+});
+
+router.get("/:id", (req, res) => {
+    searchId(req, res);
 });
 
 router.post('/', imprimir,  (req, res) => {

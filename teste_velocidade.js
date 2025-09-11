@@ -11,6 +11,7 @@ const alvo = tamanho - 1; // último elemento
 // ---------------------
 // FOR TRADICIONAL
 // ---------------------
+
 console.time('FOR');
 let indexFor = -1;
 for (let i = 0; i < arr.length; i++) {

@@ -1,14 +1,31 @@
 
-let id = 1;
+import { PrismaClient } from "@prisma/client";
 
-const users = [{
-    nome: "admin", 
-    email: "admin@gmail.com",
-    id: id
-}];
+const prisma = new PrismaClient();
 
-export function allUsers(req, res) {
-    res.status(200).json(users);
+// let id = 1;
+
+// const users = [{
+//     nome: "admin", 
+//     email: "admin@gmail.com",
+//     id: id
+// }];
+
+export async function searchId(req, res) {
+    const id = parseInt(req.params.id);
+    const user = await prisma.users.findUnique( // ta procurando por um ID só
+        {
+            where: {
+                id:id
+            }
+        }
+    );
+    res.status(200).json(user);
+};
+
+export async function allUsers(req, res) { // o async é para sinalizar que tem algo que pode demorar na funcao
+    const usersDB = await prisma.users.findMany(); // sinaliza que vai demorar e é para esperar a resposta
+    res.status(200).json(usersDB);
 };
 
 export function createUser(req, res) {
@@ -22,7 +39,7 @@ export function createUser(req, res) {
         return res.status(400).json({mensagem: "error"});
     };
 
-    id++;
+    // id++;
     
     const newUser = {
         name: nome,

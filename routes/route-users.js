@@ -8,6 +8,7 @@ const router = express();
 //passar as rotas:
 
 router.get('/', imprimir,  /* exemploMiddleware, Middleware2 (quantos precisar) */ (req, res) => {
+    // console.log(req.headers)
     allUsers(req, res);
 });
 

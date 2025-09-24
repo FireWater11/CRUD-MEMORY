@@ -1,5 +1,6 @@
 import express, { json } from "express";
 import routeUser from "./routes/route-users.js";
+import { verifyUser } from "./middlewares/auth.js";
 
 const app = express();
 
@@ -8,6 +9,7 @@ const app = express();
 // executado antes de TODAS as rotas.
 
 app.use(express.json()); // isso é um middleware . 
+app.use(verifyUser)
 app.use("/users", routeUser)
 
 
